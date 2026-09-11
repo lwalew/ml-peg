@@ -64,7 +64,7 @@ def test_bond_length_distribution(mlip: tuple[str, Any]) -> None:
     benchmark = MlPegBondLengthDistributionBenchmark(
         force_field=calc,
         data_input_dir=data_input_dir,
-        run_mode="standard",
+        run_mode="dev",
     )
     try:
         benchmark.run_model()
