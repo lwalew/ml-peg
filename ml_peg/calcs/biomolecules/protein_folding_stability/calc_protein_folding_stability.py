@@ -56,7 +56,11 @@ def test_protein_folding_stability(mlip: tuple[str, Any]) -> None:
     """
     model_name, model = mlip
     calc = model.get_calculator(precision="low")
-    calc = model.add_d3_calculator(calc)
+    # EXPERIMENT: D3 deliberately NOT attached, to isolate the cost of the
+    # dispersion correction. ml-peg normally adds a TorchDFTD3Calculator for
+    # models with trained_on_dispersion: false, with a 40 Bohr (~21 A) cutoff
+    # evaluated every step. Do not merge: this changes the physics.
+    # calc = model.add_d3_calculator(calc)
 
     data_input_dir = download_s3_data(
         key="inputs/biomolecules/protein_folding_stability/protein_folding_stability.zip",
